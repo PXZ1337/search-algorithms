@@ -24,3 +24,16 @@ def test_search_func_not_found(search_func: Callable):
     assert search_func(*(search_elem, sample_list)) == -1
     print("took %s" % (time.time() - start_time))
     print(f"Did not found {search_elem} in list: {sample_list[:10]}..")
+
+def test_min_max_search(size_of_sample_set: int, min_max_search_func: Callable):
+    x, y = -size_of_sample_set, size_of_sample_set
+    sample_list = random.sample(range(x, y), size_of_sample_set)
+    expected_min, expected_max = min(sample_list), max(sample_list)
+
+    start_time = time.time()
+    actual_min, actual_max = min_max_search_func(sample_list)
+    print("took %s" % (time.time() - start_time))
+
+    assert (expected_min, expected_max) == (actual_min, actual_max)
+
+    print(f"Found min/max {actual_min}/{actual_max} in {sample_list[:10]}...")
